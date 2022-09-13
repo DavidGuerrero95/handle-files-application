@@ -23,8 +23,8 @@ def process():
     if request.method == 'GET':
         algorithm_collection = mongo.db.estadisticas
         statistics = algorithm_collection.find()
-        for statistic in statistics:
-            print(statistic)  # Pruebas
+        print(type(statistics))
+        print(statistics)
         return statistics
 
 
