@@ -2,6 +2,7 @@ from flask import Flask, request
 import pandas as pd
 import py_eureka_client.eureka_client as eureka_client
 from flask_pymongo import PyMongo
+from flask_cors import CORS, cross_origin
 
 rest_port = 8055
 eureka_client.init(eureka_server="http://eureka:8761/eureka",
@@ -11,6 +12,7 @@ eureka_client.init(eureka_server="http://eureka:8761/eureka",
 app = Flask(__name__)
 app.config["MONGO_URI"] = 'mongodb://root:123456@mongo:27018/estadisticasApp?authSource=admin'
 mongo = PyMongo(app)
+cors = CORS(app)
 
 
 @app.route('/prueba/', methods=["GET"])
@@ -19,6 +21,7 @@ def prueba():
 
 
 @app.route('/estadisticas/ver/', methods=["GET"])
+@cross_origin()
 def process():
     if request.method == 'GET':
         algorithm_collection = mongo.db.estadisticas
