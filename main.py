@@ -21,7 +21,6 @@ def prueba():
 
 
 @app.route('/estadisticas/ver/', methods=["GET"])
-@cross_origin()
 def process():
     if request.method == 'GET':
         algorithm_collection = mongo.db.estadisticas
